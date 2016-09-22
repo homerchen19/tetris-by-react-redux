@@ -24,7 +24,7 @@ module.exports = {
       exclude: /node_modules/,
     }, {
       test: /\.scss$/,
-      loader: 'style!css!sass',
+      loader: 'style!css!sass?sourceMap',
     }],
   },
   devtool: 'eval',
