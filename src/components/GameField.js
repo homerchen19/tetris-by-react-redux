@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layer, Stage } from 'react-konva';
-import constants from '../constants.js'
+import constants from '../constants/constants.js'
 
 const { fieldWidth, fieldHeight } = constants;
 
