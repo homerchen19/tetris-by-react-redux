@@ -4,15 +4,16 @@ import { loadGame } from '../actions/index.js';
 class Menu extends React.Component {
 
   componentDidMount() {
+    
     window.addEventListener('keyup', this.props.handleSpaceBar);
-
-    if(this.props.isPlaying) {
-      alert("remove");
-      window.removeEventListener('keyup', this.props.handleSpaceBar);
-    }
   }
 
   render() {
+
+    if(this.props.isPlaying) {
+      window.removeEventListener('keyup', this.props.handleSpaceBar);
+    }
+
     return (
       <div>
         <h1 id="pageMenu">Tetris</h1>

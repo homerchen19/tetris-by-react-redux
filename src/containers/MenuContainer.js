@@ -4,11 +4,12 @@ import { loadGame } from '../actions/index.js';
 
 const MenuContainer = connect(
 	(state) => ({
-		isPlaying: state.get('isPlaying'),
+		isPlaying: state.getIn(['menuReducer', 'isPlaying']),
 	}),
 	(dispatch) => ({
 		handleSpaceBar: (e) => {
 			if (e.keyCode === 32) {
+
         dispatch(loadGame());
 
 				let handleMoving = (e) => {

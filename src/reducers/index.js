@@ -8,4 +8,8 @@ const menuReducer = handleActions({
   )
 }, MenuState);
 
-export default menuReducer;
+const rootReducer = combineReducers({
+  menuReducer,
+});
+
+export default rootReducer;
