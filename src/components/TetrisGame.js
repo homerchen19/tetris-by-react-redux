@@ -1,12 +1,26 @@
 import React from 'react';
-import GameField from './GameField.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import MenuContainer from '../containers/MenuContainer.js';
 import GameFieldContainer from '../containers/GameFieldContainer.js';
+import GameInfoContainer from '../containers/GameInfoContainer.js';
+import constants from '../constants/constants.js';
+
+injectTapEventPlugin();
+
+const { fieldWidth, fieldHeight } = constants;
 
 const TetrisGame = () => (
   <div>
-    <MenuContainer />
-    <GameFieldContainer />
+    <div>
+      <MenuContainer />
+    </div>
+    <div>
+      <GameFieldContainer />
+      <MuiThemeProvider>
+        <GameInfoContainer />
+      </MuiThemeProvider>
+    </div>
   </div>
 );
 

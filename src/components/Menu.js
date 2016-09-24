@@ -1,10 +1,9 @@
 import React from 'react';
-import { loadGame } from '../actions/index.js';
 
 class Menu extends React.Component {
 
   componentDidMount() {
-    
+
     window.addEventListener('keyup', this.props.handleSpaceBar);
   }
 
@@ -20,7 +19,6 @@ class Menu extends React.Component {
         {!this.props.isPlaying ? <h2 style={{color:'gray'}}>Press spacebar to play the game!</h2> : null}
       </div>
     );
-
   }
 }
 
