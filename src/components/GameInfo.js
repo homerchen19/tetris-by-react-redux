@@ -15,7 +15,7 @@ let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGa
           label={ isPaused ? 'UNPAUSE' : 'PAUSE'}
           style={ buttonStyle }
           primary
-          onClick={ changePauseState }
+          onClick={ changePauseState(isPaused) }
           disabled={ isGameOver }
         />
         <div className="scorePanel">

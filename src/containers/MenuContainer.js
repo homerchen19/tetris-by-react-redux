@@ -4,7 +4,7 @@ import { loadGame } from '../actions/index.js';
 
 const MenuContainer = connect(
 	(state) => ({
-		isPlaying: state.getIn(['menuReducer', 'isPlaying']),
+		isPlaying: state.getIn(['menuReducer', 'gameStatus']) === 'PLAYING',
 	}),
 	(dispatch) => ({
 		handleSpaceBar: (e) => {

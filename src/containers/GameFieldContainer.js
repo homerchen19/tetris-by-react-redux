@@ -3,7 +3,7 @@ import GameField from '../components/GameField.js';
 
 const GameFieldContainer = connect (
   (state) => ({
-    isPlaying: state.getIn(['menuReducer', 'isPlaying'])
+    isPlaying: state.getIn(['menuReducer', 'gameStatus']) === 'PLAYING',
   }),
   (dispatch) => ({})
 )(GameField);
