@@ -4,11 +4,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MenuContainer from '../containers/MenuContainer.js';
 import GameFieldContainer from '../containers/GameFieldContainer.js';
 import GameInfoContainer from '../containers/GameInfoContainer.js';
-import constants from '../constants/constants.js';
+import Constants from '../constants/constants.js';
 
 injectTapEventPlugin();
 
-const { fieldWidth, fieldHeight } = constants;
+const { fieldWidth, fieldHeight } = Constants;
 
 const TetrisGame = () => (
   <div>

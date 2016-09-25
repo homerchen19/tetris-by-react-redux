@@ -11,3 +11,10 @@ export const GameInfoState = Immutable.fromJS({
   points: 0,
   clearedLines: 0,
 });
+
+export const TetrominoState = Immutable.fromJS({
+  offsetX: 0,
+	offsetY: 0,
+	tetrominoShape: [],
+	tetrominoColor: '',
+});

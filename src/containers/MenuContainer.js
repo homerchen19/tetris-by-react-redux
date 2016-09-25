@@ -1,6 +1,17 @@
 import { connect } from 'react-redux';
 import Menu from '../components/Menu.js';
-import { loadGame } from '../actions/index.js';
+import { playGame, startGame } from '../actions/index.js';
+import Constants from '../constants/constants.js';
+
+let dispatchStartGame = (dispatch) => {
+	let { shapesMapping } = Constants;
+	let currentRandomNumber = Math.floor(Math.random() * 7);
+	let nextRandomNumber = Math.floor(Math.random() * 7);
+	let currentRandomShape = shapesMapping[currentRandomNumber];
+	let nextRandomShape = shapesMapping[nextRandomNumber];
+
+	dispatch(startGame({ currentRandomShape, nextRandomShape }));
+};
 
 const MenuContainer = connect(
 	(state) => ({
@@ -10,7 +21,7 @@ const MenuContainer = connect(
 		handleSpaceBar: (e) => {
 			if (e.keyCode === 32) {
 
-        dispatch(loadGame());
+        dispatch(playGame());
 
 				let handleMoving = (e) => {
 					switch (e.keyCode) {
@@ -44,6 +55,8 @@ const MenuContainer = connect(
 
 				window.addEventListener('keydown', handleMoving);
 				window.addEventListener('keydown', handleRotation);
+
+				dispatchStartGame(dispatch);
 			}
 		}
 	})
