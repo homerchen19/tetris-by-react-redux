@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --inline"
+    "start": "webpack-dev-server --devtool eval --progress --colors --inline --content-based build"
   },
   "author": "",
   "license": "ISC",
@@ -28,7 +28,8 @@
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "brfs": "^1.4.3",
     "css-loader": "^0.24.0",
@@ -46,6 +47,7 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "redux-immutable": "^3.0.8",
     "redux-logger": "^2.6.1",
+    "redux-multi": "^0.1.12",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "transform-loader": "^0.2.3",

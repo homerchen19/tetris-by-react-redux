@@ -1,7 +1,15 @@
 import { connect } from 'react-redux';
 import Menu from '../components/Menu.js';
-import { playGame, startGame } from '../actions/index.js';
 import Constants from '../constants/constants.js';
+import {
+	playGame,
+	setTetrominoShape,
+	setTetrominoName,
+	setTetrominoColor,
+	setOffsetX,
+	setOffsetY
+} from '../actions/index.js';
+
 
 let dispatchStartGame = (dispatch) => {
 	let { shapesMapping } = Constants;
@@ -10,7 +18,13 @@ let dispatchStartGame = (dispatch) => {
 	let currentRandomShape = shapesMapping[currentRandomNumber];
 	let nextRandomShape = shapesMapping[nextRandomNumber];
 
-	dispatch(startGame({ currentRandomShape, nextRandomShape }));
+	dispatch([
+		setTetrominoShape({ currentRandomShape }),
+		setTetrominoName({ currentRandomShape }),
+		setTetrominoColor({ currentRandomShape }),
+		setOffsetX(),
+		setOffsetY()
+	]);
 };
 
 const MenuContainer = connect(

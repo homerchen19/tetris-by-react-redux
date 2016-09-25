@@ -21,19 +21,20 @@ const gameInfoReducer = handleActions({
 }, GameInfoState);
 
 const gameFieldReducer = handleActions({
-  START_GAME: (state, { payload }) => (
-    // state.set('tetrominoShape', tetrominos[payload.currentRandomShape].shape),
-    // state.set('tetrominoName', payload.currentRandomShape),
-    // state.set('tetrominoColor', tetrominos[payload.currentRandomShape].color),
-    // state.set('offsetX', blockUnit * 3),
-    // state.set('offsetY', 0)
-    {
-      'tetrominoShape': tetrominos[payload.currentRandomShape].shape,
-      'tetrominoName': payload.currentRandomShape,
-      'tetrominoColor': tetrominos[payload.currentRandomShape].color,
-      'offsetX': blockUnit * 3,
-      'offsetY': 0
-    }
+  SET_TETROMINO_SHAPE: (state, { payload }) => (
+    state.set('tetrominoShape', tetrominos[payload.currentRandomShape].shape)
+  ),
+  SET_TETROMINO_NAME: (state, { payload }) => (
+    state.set('tetrominoName', payload.currentRandomShape)
+  ),
+  SET_TETROMINO_COLOR: (state, { payload }) => (
+    state.set('tetrominoColor', tetrominos[payload.currentRandomShape].color)
+  ),
+  SET_OFFSET_X: (state) => (
+    state.set('offsetX', blockUnit * 3)
+  ),
+  SET_OFFSET_Y: (state) => (
+    state.set('offsetY', 0)
   )
 }, TetrominoState);
 

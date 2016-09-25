@@ -7,22 +7,22 @@ const { blockUnit } = Constants;
 let getCoordinates = (tetrominoShape) => {
 
 	const coordinates = [];
-	// for(let i = 0; i < tetrominoShape.length; i++) {
-	// 	for(let j = 0; j < tetrominoShape[i].length; j++) {
-	// 		if(tetrominoShape[i][j]) {
-	// 			coordinates.push({ x: j, y: i });
-	// 		}
-	// 	}
-	// }
+	for(let i = 0; i < tetrominoShape.length; i++) {
+		for(let j = 0; j < tetrominoShape[i].length; j++) {
+			if(tetrominoShape[i][j]) {
+				coordinates.push({ x: j, y: i });
+			}
+		}
+	}
 	return coordinates;
 }
 
 let tetrominoGroup = (xs, ys, tetrominoColor) => {
 
 	const arr = [];
-	// for(let i = 0 ; i < xs.length; i++) {
-	// 	arr.push(<Rect key={ i } width={ blockUnit } height={ blockUnit } x={ xs[i] } y={ ys[i] } fill={ color } stroke="black" strokeWidth={ 5 } />);
-	// }
+	for(let i = 0 ; i < xs.length; i++) {
+		arr.push(<Rect key={ i } width={ blockUnit } height={ blockUnit } x={ xs[i] } y={ ys[i] } fill={ tetrominoColor } stroke="black" strokeWidth={ 5 } />);
+	}
 	return arr;
 }
 
