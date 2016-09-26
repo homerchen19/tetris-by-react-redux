@@ -16,6 +16,17 @@ import {
 	moveRight
 } from '../actions/index.js';
 
+let dropTetromino = (dispatch, startTime, getState) => {
+	const state = getState();
+	let 	currentTime = Date.now(),
+				gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']);
+
+	if (currentTime - startTime >= 500 && gameStatus !== 'PAUSED' && gameStatus !== 'GAME_OVER') {
+		startTime = currentTime;
+		dispatch(moveTetromino('down'));
+	}
+	requestAnimationFrame((dropTetromino.bind(this, dispatch, startTime, getState)));
+}
 
 let getCurrentTetrominos = (getState) => {
 	const state = getState();
@@ -32,7 +43,7 @@ let getCurrentTetrominos = (getState) => {
 let rotateTetromino = () => (
 	(dispatch, getState) => {
 		const state = getState();
-		const gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
+		let		gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
 					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
 					currentTetromino = getCurrentTetrominos(getState),
 					rotatedTetromino = Object.assign({}, currentTetromino);
@@ -48,7 +59,7 @@ let rotateTetromino = () => (
 let moveTetromino = (direction) => (
 	(dispatch, getState) => {
 		const state = getState();
-		const gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
+		let		gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
 					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
 					currentTetromino = getCurrentTetrominos(getState),
 					collisionCheck = checkCollisions(direction, activeTetrominoes, currentTetromino);
@@ -85,21 +96,26 @@ let moveTetromino = (direction) => (
 	}
 );
 
-let dispatchStartGame = (dispatch) => {
-	let { shapesMapping } = Constants;
-	let currentRandomNumber = Math.floor(Math.random() * 7);
-	let nextRandomNumber = Math.floor(Math.random() * 7);
-	let currentRandomShape = shapesMapping[currentRandomNumber];
-	let nextRandomShape = shapesMapping[nextRandomNumber];
+let startGame = () => (
+	(dispatch, getState) => {
 
-	dispatch([
-		setTetrominoShape({ currentRandomShape }),
-		setTetrominoName({ currentRandomShape }),
-		setTetrominoColor({ currentRandomShape }),
-		setOffsetX(),
-		setOffsetY()
-	]);
-};
+		const { shapesMapping } = Constants;
+		let currentRandomNumber = Math.floor(Math.random() * 7),
+		 		nextRandomNumber = Math.floor(Math.random() * 7),
+				currentRandomShape = shapesMapping[currentRandomNumber],
+				nextRandomShape = shapesMapping[nextRandomNumber];
+
+		dispatch([
+			setTetrominoShape({ currentRandomShape }),
+			setTetrominoName({ currentRandomShape }),
+			setTetrominoColor({ currentRandomShape }),
+			setOffsetX(),
+			setOffsetY()
+		]);
+
+		dropTetromino(dispatch, Date.now(), getState); // Let Tetromino drop
+	}
+);
 
 const MenuContainer = connect(
 	(state) => ({
@@ -108,8 +124,8 @@ const MenuContainer = connect(
 	(dispatch) => ({
 		handleSpaceBar: (e) => {
 			if(e.keyCode === 32) {
-
         dispatch([playGame(), setInitActiveTetrominoes()]);
+				dispatch(startGame());
 
 				let handleMoving = (e) => {
 					switch(e.keyCode) {
@@ -143,8 +159,6 @@ const MenuContainer = connect(
 
 				window.addEventListener('keydown', handleMoving);
 				window.addEventListener('keydown', handleRotation);
-
-				dispatchStartGame(dispatch);
 			}
 		}
 	})
