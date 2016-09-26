@@ -2,6 +2,7 @@ import Immutable from 'immutable';
 
 export const MenuState = Immutable.fromJS({
   isPlaying: false,
+  globalGameStatus: ''
 });
 
 export const GameInfoState = Immutable.fromJS({
@@ -10,6 +11,7 @@ export const GameInfoState = Immutable.fromJS({
   isGameOver: false,
   points: 0,
   clearedLines: 0,
+  gameStatus: 'PLAYING'
 });
 
 export const TetrominoState = Immutable.Map({
@@ -17,4 +19,8 @@ export const TetrominoState = Immutable.Map({
 	offsetY: 0,
 	tetrominoShape: [],
 	tetrominoColor: '',
+});
+
+export const ActiveTetrominoesState = Immutable.Map({
+  activeTetrominoes: []
 });

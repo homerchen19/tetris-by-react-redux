@@ -3,12 +3,10 @@ import React from 'react';
 class Menu extends React.Component {
 
   componentDidMount() {
-
     window.addEventListener('keyup', this.props.handleSpaceBar);
   }
 
   render() {
-
     if(this.props.isPlaying) {
       window.removeEventListener('keyup', this.props.handleSpaceBar);
     }

@@ -1,12 +1,22 @@
+const initialGrid = [];
+for (let index = 0; index < 15; index++) {
+	initialGrid.push([]);
+}
+for (let index = 0; index < 15; index++) {
+	for (let count = 0; count < 25; count++) {
+		initialGrid[index].push('grey');
+	}
+}
+
 export default {
   fieldWidth: 300,
 	fieldHeight: 660,
   blockUnit: 30,
-  
+
   shapesMapping: [
 		'straight', 'square', 'cross', 'leftGun', 'rightGun', 'leftSnake', 'rightSnake',
 	],
-  tetrominos: {
+  tetrominoes: {
 		straight: {
 			shape: [
 				[1, 1, 1, 1],
@@ -70,5 +80,6 @@ export default {
 			],
 			color: 'brown',
 		},
-	}
-}
+	},
+  initialGrid,
+};

@@ -1,15 +1,89 @@
 import { connect } from 'react-redux';
 import Menu from '../components/Menu.js';
 import Constants from '../constants/constants.js';
+import { rotateArray, checkCollisions, getCompletedLines } from '../lib/index.js';
 import {
 	playGame,
+	setInitActiveTetrominoes,
 	setTetrominoShape,
 	setTetrominoName,
 	setTetrominoColor,
 	setOffsetX,
-	setOffsetY
+	setOffsetY,
+	rotateRight,
+	moveDown,
+	moveLeft,
+	moveRight
 } from '../actions/index.js';
 
+
+let getCurrentTetrominos = (getState) => {
+	const state = getState();
+
+	return {
+		tetrominoShape: state.getIn(['gameFieldReducer', 'tetrominoShape']),
+		tetrominoName: state.getIn(['gameFieldReducer', 'tetrominoName']),
+		tetrominoColor: state.getIn(['gameFieldReducer', 'tetrominoColor']),
+		offsetX: state.getIn(['gameFieldReducer', 'offsetX']),
+		offsetY: state.getIn(['gameFieldReducer', 'offsetY'])
+	}
+};
+
+let rotateTetromino = () => (
+	(dispatch, getState) => {
+		const state = getState();
+		const gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
+					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
+					currentTetromino = getCurrentTetrominos(getState),
+					rotatedTetromino = Object.assign({}, currentTetromino);
+
+		rotatedTetromino.tetrominoShape = rotateArray(rotatedTetromino);
+
+		if (!checkCollisions('rotation', activeTetrominoes, rotatedTetromino) && gameStatus === 'PLAYING') {
+			dispatch(rotateRight(rotatedTetromino.tetrominoShape));
+		}
+	}
+);
+
+let moveTetromino = (direction) => (
+	(dispatch, getState) => {
+		const state = getState();
+		const gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
+					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
+					currentTetromino = getCurrentTetrominos(getState),
+					collisionCheck = checkCollisions(direction, activeTetrominoes, currentTetromino);
+
+		if(gameStatus === 'PAUSED' || gameStatus === 'GAME_OVER') {
+			return;
+		}
+
+		switch(direction) {
+			case 'left':
+				if(collisionCheck === false) {
+					dispatch(moveLeft());
+				}
+				return;
+			case 'right':
+				if(collisionCheck === false) {
+					dispatch(moveRight());
+				}
+				return;
+			case 'down':
+				if(collisionCheck === false) {
+					dispatch(moveDown());
+				} else if(collisionCheck === GAME_OVER) {
+					dispatch(gameOver());
+				} else {
+					const clearedLines = getCompletedLines(activeTetrominoes, currentTetromino).length;
+					dispatch(addScore(clearedLines));
+					dispatch(addTetromino({ currentTetromino, nextTetromino }));
+				}
+				return;
+			default:
+				return;
+		}
+	}
+);
 
 let dispatchStartGame = (dispatch) => {
 	let { shapesMapping } = Constants;
@@ -29,16 +103,16 @@ let dispatchStartGame = (dispatch) => {
 
 const MenuContainer = connect(
 	(state) => ({
-		isPlaying: state.getIn(['menuReducer', 'gameStatus']) === 'PLAYING',
+		isPlaying: state.getIn(['menuReducer', 'globalGameStatus']) === 'PLAYING',
 	}),
 	(dispatch) => ({
 		handleSpaceBar: (e) => {
-			if (e.keyCode === 32) {
+			if(e.keyCode === 32) {
 
-        dispatch(playGame());
+        dispatch([playGame(), setInitActiveTetrominoes()]);
 
 				let handleMoving = (e) => {
-					switch (e.keyCode) {
+					switch(e.keyCode) {
 						case 37:
 							e.preventDefault();
 							dispatch(moveTetromino('left'));
@@ -57,7 +131,7 @@ const MenuContainer = connect(
 				};
 
 				let handleRotation = (e) => {
-					switch (e.keyCode) {
+					switch(e.keyCode) {
 						case 38:
 							e.preventDefault();
 							dispatch(rotateTetromino());

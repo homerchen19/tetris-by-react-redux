@@ -5,7 +5,7 @@ import { startGame } from '../actions/index.js';
 
 const GameFieldContainer = connect (
   (state) => ({
-    isPlaying: state.getIn(['menuReducer', 'gameStatus']) === 'PLAYING',
+    isPlaying: state.getIn(['menuReducer', 'globalGameStatus']) === 'PLAYING',
   }),
   (dispatch) => ({})
 )(GameField);

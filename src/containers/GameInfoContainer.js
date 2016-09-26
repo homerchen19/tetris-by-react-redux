@@ -4,11 +4,11 @@ import GameInfo from '../components/GameInfo.js';
 
 const GameInfoContainer = connect (
   (state, nextTetromino) => ({
-    isPlaying: state.getIn(['menuReducer', 'gameStatus']) === 'PLAYING',
+    isPlaying: state.getIn(['menuReducer', 'globalGameStatus']) === 'PLAYING',
     isPaused: state.getIn(['gameInfoReducer', 'gameStatus']) === 'PAUSED',
 	  isGameOver: state.getIn(['gameInfoReducer', 'gameStatus']) === 'OVER',
-    points: 1, // gameScore.points,
-	  clearedLines: 1, //  gameScore.clearedLines,
+    points: 0,
+	  clearedLines: 0,
 	  nextTetromino,
   }),
   (dispatch) => ({

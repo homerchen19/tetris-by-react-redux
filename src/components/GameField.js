@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layer, Stage } from 'react-konva';
 import CurrentTetrominoContainer from '../containers/CurrentTetrominoContainer.js';
+import ActiveTetrominoesContainer from '../containers/ActiveTetrominoesContainer.js';
 import constants from '../constants/constants.js';
 
 const { fieldWidth, fieldHeight } = constants;
@@ -14,6 +15,7 @@ let GameField = ({ isPlaying, letsStartGame }) => {
           <Stage width={ fieldWidth } height={ fieldHeight }>
             <Layer>
               <CurrentTetrominoContainer />
+              {/* <ActiveTetrominoesContainer /> */}
             </Layer>
           </Stage>
         </div>
