@@ -19,7 +19,7 @@ const gameInfoReducer = handleActions({
   UNPAUSE_GAME: (state) => (
     state.set('gameStatus', 'PLAYING')
   ),
-  ADD_POINT: (state, { payload }) => (
+  ADD_POINTS: (state, { payload }) => (
     state.set('points', payload)
   ),
   ADD_CLEARED_LINES: (state, { payload }) => (
@@ -46,6 +46,9 @@ const currentTetrominoReducer = handleActions({
   ),
   ROTATE_TETROMINO: (state, { payload }) => (
     Object.assign({}, state, { shape: payload })
+  ),
+  ADD_CURRENT_TETROMINO: (state, { payload }) => (
+    Object.assign({}, payload, { offsetX: blockUnit * 3, offsetY: 0 })
   )
 }, TetrominoState);
 

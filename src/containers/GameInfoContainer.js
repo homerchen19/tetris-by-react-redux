@@ -3,13 +3,12 @@ import { pauseGame, unpauseGame } from '../actions/index.js';
 import GameInfo from '../components/GameInfo.js';
 
 const GameInfoContainer = connect (
-  (state, nextTetromino) => ({
+  (state) => ({
     isPlaying: state.getIn(['menuReducer', 'globalGameStatus']) === 'PLAYING',
     isPaused: state.getIn(['gameInfoReducer', 'gameStatus']) === 'PAUSED',
 	  isGameOver: state.getIn(['gameInfoReducer', 'gameStatus']) === 'OVER',
-    points: 0,
-	  clearedLines: 0,
-	  nextTetromino,
+    points: state.getIn(['gameInfoReducer', 'points']),
+	  clearedLines: state.getIn(['gameInfoReducer', 'clearedLines'])
   }),
   (dispatch) => ({
     changePauseState: (isPaused) => () => {

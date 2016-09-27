@@ -13,6 +13,7 @@ import {
 	addPoints,
 	addClearedLines,
 	addNextTetromino,
+	addCurrentTetromino,
 	addNewClearedGrid
 } from '../actions/index.js';
 
@@ -24,7 +25,8 @@ let addTetromino = (currentTetromino, nextTetromino, activeTetrominoes) => (
 
 		dispatch([
 			addNextTetromino(nextRandomShape),
-			addNewClearedGrid(getNewClearedGrid(activeTetrominoes, currentTetromino, currentTetromino.color))
+			addNewClearedGrid(getNewClearedGrid(activeTetrominoes, currentTetromino, currentTetromino.color)),
+			addCurrentTetromino(nextTetromino)
 		]);
 	}
 );

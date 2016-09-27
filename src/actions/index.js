@@ -14,3 +14,4 @@ export const addPoints = createAction('ADD_POINTS');
 export const addClearedLines = createAction('ADD_CLEARED_LINES');
 export const addNextTetromino = createAction('ADD_NEXT_TETROMINO');
 export const addNewClearedGrid = createAction('ADD_NEW_CLEARED_GRID');
+export const addCurrentTetromino = createAction('ADD_CURRENT_TETROMINO');
