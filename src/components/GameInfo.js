@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Layer, Stage } from 'react-konva';
+import NextTetrominoContainer from '../containers/NextTetrominoContainer.js';
 
 let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGameOver, changePauseState }) => {
 
@@ -22,7 +23,7 @@ let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGa
           <h2>Next</h2>
           <Stage width={ 250 } height={ 100 }>
             <Layer>
-							{/* <NextTetromino /> */}
+							<NextTetrominoContainer />
             </Layer>
           </Stage>
         </div>

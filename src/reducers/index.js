@@ -48,19 +48,27 @@ const currentTetrominoReducer = handleActions({
   )
 }, TetrominoState);
 
+const nextTetrominoReducer = handleActions({
+  ADD_NEXT_TETROMINO: (state, { payload }) => ({
+    shape: tetrominoes[payload].shape,
+		name: payload,
+		color: tetrominoes[payload].color,
+		offsetX: 10,
+		offsetY: blockUnit,
+  })
+}, {});
+
 const activeTetrominoesReducer = handleActions({
   SET_INIT_ACTIVE_TETROMINOES: (state) => (
     state.set('activeTetrominoes', initialGrid)
-  ),
-  // ADD_TETROMINO: (state) => (
-  //
-  // )
+  )
 }, ActiveTetrominoesState);
 
 const rootReducer = combineReducers({
   menuReducer,
   gameInfoReducer,
   currentTetrominoReducer,
+  nextTetrominoReducer,
   activeTetrominoesReducer
 });
 
