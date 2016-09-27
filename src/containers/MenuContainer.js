@@ -5,16 +5,32 @@ import { rotateArray, checkCollisions, getCompletedLines } from '../lib/index.js
 import {
 	playGame,
 	setInitActiveTetrominoes,
-	setTetrominoShape,
-	setTetrominoName,
-	setTetrominoColor,
-	setOffsetX,
-	setOffsetY,
+	// setTetrominoShape,
+	// setTetrominoName,
+	// setcolor,
+	// setOffsetX,
+	// setOffsetY,
+	setCurrentTetromino,
 	rotateRight,
 	moveDown,
 	moveLeft,
-	moveRight
+	moveRight,
+	addPoints,
+	addClearedLines
 } from '../actions/index.js';
+
+ let addTetromino = (currentTetromino, nextTetromino) => {
+	 (dispatch) => {
+		 const { shapesMapping } = gameConstants;
+		 const newRandomNumber = Math.floor(Math.random() * 7);
+		 const nextRandomShape = shapesMapping[newRandomNumber];
+
+		 console.log(nextTetromino);
+	 }
+
+
+
+};
 
 let dropTetromino = (dispatch, startTime, getState) => {
 	const state = getState();
@@ -28,15 +44,16 @@ let dropTetromino = (dispatch, startTime, getState) => {
 	requestAnimationFrame((dropTetromino.bind(this, dispatch, startTime, getState)));
 }
 
-let getCurrentTetrominos = (getState) => {
+let getCurrentTetrominoes = (getState) => {
 	const state = getState();
+	let tmp = state.get('currentTetrominoReducer');
 
 	return {
-		tetrominoShape: state.getIn(['gameFieldReducer', 'tetrominoShape']),
-		tetrominoName: state.getIn(['gameFieldReducer', 'tetrominoName']),
-		tetrominoColor: state.getIn(['gameFieldReducer', 'tetrominoColor']),
-		offsetX: state.getIn(['gameFieldReducer', 'offsetX']),
-		offsetY: state.getIn(['gameFieldReducer', 'offsetY'])
+		shape: tmp.shape,
+		name: tmp.name,
+		color: tmp.color,
+		offsetX: tmp.offsetX,
+		offsetY: tmp.offsetY
 	}
 };
 
@@ -45,13 +62,13 @@ let rotateTetromino = () => (
 		const state = getState();
 		let		gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
 					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
-					currentTetromino = getCurrentTetrominos(getState),
+					currentTetromino = getCurrentTetrominoes(getState),
 					rotatedTetromino = Object.assign({}, currentTetromino);
 
-		rotatedTetromino.tetrominoShape = rotateArray(rotatedTetromino);
+		rotatedTetromino.shape = rotateArray(rotatedTetromino);
 
 		if (!checkCollisions('rotation', activeTetrominoes, rotatedTetromino) && gameStatus === 'PLAYING') {
-			dispatch(rotateRight(rotatedTetromino.tetrominoShape));
+			dispatch(rotateRight(rotatedTetromino.shape));
 		}
 	}
 );
@@ -61,7 +78,7 @@ let moveTetromino = (direction) => (
 		const state = getState();
 		let		gameStatus = state.getIn(['gameInfoReducer', 'gameStatus']),
 					activeTetrominoes = state.getIn(['activeTetrominoesReducer', 'activeTetrominoes']),
-					currentTetromino = getCurrentTetrominos(getState),
+					currentTetromino = getCurrentTetrominoes(getState),
 					collisionCheck = checkCollisions(direction, activeTetrominoes, currentTetromino);
 
 		if(gameStatus === 'PAUSED' || gameStatus === 'GAME_OVER') {
@@ -82,11 +99,12 @@ let moveTetromino = (direction) => (
 			case 'down':
 				if(collisionCheck === false) {
 					dispatch(moveDown());
-				} else if(collisionCheck === GAME_OVER) {
+				} else if(collisionCheck === 'GAME_OVER') {
 					dispatch(gameOver());
 				} else {
-					const clearedLines = getCompletedLines(activeTetrominoes, currentTetromino).length;
-					dispatch(addScore(clearedLines));
+					let clearedLines = getCompletedLines(activeTetrominoes, currentTetromino).length,
+							points = Math.pow(clearedLines, 2) * 100;
+					dispatch([addPoints(points), addClearedLines(clearedLines)]);
 					dispatch(addTetromino({ currentTetromino, nextTetromino }));
 				}
 				return;
@@ -98,20 +116,12 @@ let moveTetromino = (direction) => (
 
 let startGame = () => (
 	(dispatch, getState) => {
-
 		const { shapesMapping } = Constants;
 		let currentRandomNumber = Math.floor(Math.random() * 7),
 		 		nextRandomNumber = Math.floor(Math.random() * 7),
-				currentRandomShape = shapesMapping[currentRandomNumber],
-				nextRandomShape = shapesMapping[nextRandomNumber];
+				currentRandomShape = shapesMapping[currentRandomNumber];
 
-		dispatch([
-			setTetrominoShape({ currentRandomShape }),
-			setTetrominoName({ currentRandomShape }),
-			setTetrominoColor({ currentRandomShape }),
-			setOffsetX(),
-			setOffsetY()
-		]);
+		dispatch(setCurrentTetromino({ currentRandomShape }))
 
 		dropTetromino(dispatch, Date.now(), getState); // Let Tetromino drop
 	}

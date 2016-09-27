@@ -6,11 +6,11 @@ let occupied = (grid, x, y) => {
 
 export const getActualCoordinates = (newTetromino) => {
 	const coordinates = [];
-	const { tetrominoShape, offsetX, offsetY } = newTetromino;
+	const { shape, offsetX, offsetY } = newTetromino;
 	const { blockUnit } = Constants;
-	for(let i = 0; i < tetrominoShape.length; i++) {
-		for(let j = 0; j < tetrominoShape[i].length; j++) {
-			if(tetrominoShape[i][j]) {
+	for(let i = 0; i < shape.length; i++) {
+		for(let j = 0; j < shape[i].length; j++) {
+			if(shape[i][j]) {
 				coordinates.push({ x: j + (offsetX / blockUnit), y: i + (offsetY / blockUnit) });
 			}
 		}
@@ -18,12 +18,12 @@ export const getActualCoordinates = (newTetromino) => {
 	return coordinates;
 }
 
-export const getNewColoredGrid = (grid, tetromino, tetrominoColor) => {
+export const getNewColoredGrid = (grid, tetromino, color) => {
 	const gridCopy = grid.map((x) => [...x]);
 	const coords = getActualCoordinates(tetromino);
 	for(let j = 0; j < coords.length; j++) {
 		const { x, y } = coords[j];
-		gridCopy[x][y] = tetrominoColor;
+		gridCopy[x][y] = color;
 	}
 	return gridCopy;
 }
@@ -50,9 +50,9 @@ export const getCompletedLines = (grid, tetromino) => {
 	return linesToClear;
 }
 
-export const getNewClearedGrid = (grid, tetromino, tetrominoColor) => {
+export const getNewClearedGrid = (grid, tetromino, color) => {
 	const linesToClear = getCompletedLines(grid, tetromino);
-	const gridCopy = getNewColoredGrid(grid, tetromino, tetrominoColor);
+	const gridCopy = getNewColoredGrid(grid, tetromino, color);
 	for(const row of linesToClear) {
 		for(let j = 0; j < 10; j++) {
 			gridCopy[j][row] = 'grey';
@@ -68,7 +68,7 @@ export const getNewClearedGrid = (grid, tetromino, tetrominoColor) => {
 }
 
 export const rotateArray = (tetromino) => {
-	const matrix = tetromino.tetrominoShape;
+	const matrix = tetromino.shape;
 	const n = matrix.length;
 	const ret = [[], [], [], []];
 	let closestX = 10;
@@ -108,9 +108,9 @@ export const checkCollisions = (direction, activeTetrominos, currentTetromino) =
 			break;
 	}
 
-	for(let i = 0; i < currentTetromino.tetrominoShape.length; i++) {
-		for(let j = 0; j < currentTetromino.tetrominoShape[i].length; j++) {
-			const coord = currentTetromino.tetrominoShape[i][j];
+	for(let i = 0; i < currentTetromino.shape.length; i++) {
+		for(let j = 0; j < currentTetromino.shape[i].length; j++) {
+			const coord = currentTetromino.shape[i][j];
 			if(coord) {
 				const totalX = nx + currentX + j;
 				const totalY = ny + currentY + i;

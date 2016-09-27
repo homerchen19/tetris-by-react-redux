@@ -17,49 +17,50 @@ const gameInfoReducer = handleActions({
   ),
   UNPAUSE_GAME: (state) => (
     state.set('gameStatus', 'PLAYING')
+  ),
+  ADD_POINT: (state, { payload }) => (
+    state.set('points', payload)
+  ),
+  ADD_CLEARED_LINES: (state, { payload }) => (
+    state.set('clearedLines', payload)
   )
 }, GameInfoState);
 
-const gameFieldReducer = handleActions({
-  SET_TETROMINO_SHAPE: (state, { payload }) => (
-    state.set('tetrominoShape', tetrominoes[payload.currentRandomShape].shape)
-  ),
-  SET_TETROMINO_NAME: (state, { payload }) => (
-    state.set('tetrominoName', payload.currentRandomShape)
-  ),
-  SET_TETROMINO_COLOR: (state, { payload }) => (
-    state.set('tetrominoColor', tetrominoes[payload.currentRandomShape].color)
-  ),
-  SET_OFFSET_X: (state) => (
-    state.set('offsetX', blockUnit * 3)
-  ),
-  SET_OFFSET_Y: (state) => (
-    state.set('offsetY', 0)
-  ),
+const currentTetrominoReducer = handleActions({
+  SET_CURRENT_TETROMINO: (state, { payload }) => ({
+      shape: tetrominoes[payload.currentRandomShape].shape,
+			name: payload.currentRandomShape,
+			color: tetrominoes[payload.currentRandomShape].color,
+			offsetX: blockUnit * 3,
+			offsetY: 0,
+  }),
   MOVE_RIGHT: (state) => (
-    state.set('offsetX', state.get('offsetX') + blockUnit)
+    Object.assign({}, state, { offsetX: state.offsetX + blockUnit })
   ),
   MOVE_LEFT: (state) => (
-    state.set('offsetX', state.get('offsetX') - blockUnit)
+    Object.assign({}, state, { offsetX: state.offsetX - blockUnit })
   ),
   MOVE_DOWN: (state) => (
-    state.set('offsetY', state.get('offsetY') + blockUnit)
+    Object.assign({}, state, { offsetY: state.offsetY + blockUnit })
   ),
   ROTATE_TETROMINO: (state, { payload }) => (
-    state.set('tetrominoShape', payload)
+    Object.assign({}, state, { shape: payload })
   )
 }, TetrominoState);
 
 const activeTetrominoesReducer = handleActions({
   SET_INIT_ACTIVE_TETROMINOES: (state) => (
     state.set('activeTetrominoes', initialGrid)
-  )
+  ),
+  // ADD_TETROMINO: (state) => (
+  //
+  // )
 }, ActiveTetrominoesState);
 
 const rootReducer = combineReducers({
   menuReducer,
   gameInfoReducer,
-  gameFieldReducer,
+  currentTetrominoReducer,
   activeTetrominoesReducer
 });
 

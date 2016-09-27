@@ -15,7 +15,7 @@ let GameField = ({ isPlaying, letsStartGame }) => {
           <Stage width={ fieldWidth } height={ fieldHeight }>
             <Layer>
               <CurrentTetrominoContainer />
-              {/* <ActiveTetrominoesContainer /> */}
+              <ActiveTetrominoesContainer />
             </Layer>
           </Stage>
         </div>
