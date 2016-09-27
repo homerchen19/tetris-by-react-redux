@@ -19,6 +19,9 @@ const gameInfoReducer = handleActions({
   UNPAUSE_GAME: (state) => (
     state.set('gameStatus', 'PLAYING')
   ),
+  GAME_OVER: (state) => (
+    state.set('gameStatus', 'GAME_OVER')
+  ),
   ADD_POINTS: (state, { payload }) => (
     state.set('points', payload)
   ),

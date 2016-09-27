@@ -4,6 +4,7 @@ import Constants from '../constants/constants.js';
 import { rotateArray, checkCollisions, getCompletedLines, getNewClearedGrid } from '../lib/index.js';
 import {
 	playGame,
+	gameOver,
 	setInitActiveTetrominoes,
 	setCurrentTetromino,
 	rotateRight,
