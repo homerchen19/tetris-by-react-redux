@@ -12,4 +12,5 @@ export const moveLeft = createAction('MOVE_LEFT');
 export const moveRight = createAction('MOVE_RIGHT');
 export const addPoints = createAction('ADD_POINTS');
 export const addClearedLines = createAction('ADD_CLEARED_LINES');
-export const addNextTetromino = createAction('ADD_NEXT_TETROMINO')
+export const addNextTetromino = createAction('ADD_NEXT_TETROMINO');
+export const addNewClearedGrid = createAction('ADD_NEW_CLEARED_GRID');

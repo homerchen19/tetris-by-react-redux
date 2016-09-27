@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Menu from '../components/Menu.js';
 import Constants from '../constants/constants.js';
-import { rotateArray, checkCollisions, getCompletedLines } from '../lib/index.js';
+import { rotateArray, checkCollisions, getCompletedLines, getNewClearedGrid } from '../lib/index.js';
 import {
 	playGame,
 	setInitActiveTetrominoes,
@@ -12,16 +12,20 @@ import {
 	moveRight,
 	addPoints,
 	addClearedLines,
-	addNextTetromino
+	addNextTetromino,
+	addNewClearedGrid
 } from '../actions/index.js';
 
-let addTetromino = (currentTetromino, nextTetromino) => (
+let addTetromino = (currentTetromino, nextTetromino, activeTetrominoes) => (
 	(dispatch) => {
-		const { shapesMapping } = Constants;
+		const	{ shapesMapping } = Constants;
 		let 	newRandomNumber = Math.floor(Math.random() * 7),
 					nextRandomShape = shapesMapping[newRandomNumber];
 
-		dispatch(addNextTetromino(nextRandomShape));
+		dispatch([
+			addNextTetromino(nextRandomShape),
+			addNewClearedGrid(getNewClearedGrid(activeTetrominoes, currentTetromino, currentTetromino.color))
+		]);
 	}
 );
 
@@ -86,7 +90,7 @@ let moveTetromino = (direction) => (
 					let clearedLines = getCompletedLines(activeTetrominoes, currentTetromino).length,
 							points = Math.pow(clearedLines, 2) * 100;
 					dispatch([addPoints(points), addClearedLines(clearedLines)]);
-					dispatch(addTetromino(currentTetromino, nextTetromino));
+					dispatch(addTetromino(currentTetromino, nextTetromino, activeTetrominoes));
 				}
 				return;
 			default:
