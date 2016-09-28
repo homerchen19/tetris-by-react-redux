@@ -18,7 +18,7 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       include: path.join(__dirname, 'src'),
       loader: 'babel-loader',
       exclude: /node_modules/,
@@ -26,6 +26,9 @@ module.exports = {
       test: /\.scss$/,
       loader: 'style!css!sass?sourceMap',
     }],
+  },
+  resolve: {
+    extensions: ['', '.js', '.scss'],
   },
   devtool: 'eval',
   devServer: {

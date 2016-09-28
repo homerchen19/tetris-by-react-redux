@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ActiveTetrominoes from '../components/ActiveTetrominoes.js';
+import ActiveTetrominoes from '../components/ActiveTetrominoes';
 
 const ActiveTetrominoesContainer = connect (
   (state) => ({

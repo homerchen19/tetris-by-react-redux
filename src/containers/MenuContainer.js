@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Menu from '../components/Menu.js';
-import Constants from '../constants/constants.js';
+import Menu from '../components/Menu';
+import Constants from '../constants/constants';
 import { rotateArray, checkCollisions, getCompletedLines, getNewClearedGrid } from '../lib/index.js';
 import {
 	playGame,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { pauseGame, unpauseGame } from '../actions/index.js';
-import GameInfo from '../components/GameInfo.js';
+import { pauseGame, unpauseGame } from '../actions/index';
+import GameInfo from '../components/GameInfo';
 
 const GameInfoContainer = connect (
   (state) => ({

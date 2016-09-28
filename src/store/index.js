@@ -1,1 +1,1 @@
-export { default } from './configureStore.js';
+export { default } from './configureStore';

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Tetromino from '../components/Tetromino.js';
+import Tetromino from '../components/Tetromino';
 
 const NextTetrominoContainer = connect (
 	(state) => {

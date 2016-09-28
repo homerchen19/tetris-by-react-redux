@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rect, Group } from 'react-konva';
-import Constants from '../constants/constants.js';
+import Constants from '../constants/constants';
 
 const { blockUnit } = Constants;
 

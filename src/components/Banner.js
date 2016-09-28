@@ -1,9 +1,9 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import { startGame } from '../containers/MenuContainer.js';
+import { startGame } from '../containers/MenuContainer';
 import { connect } from 'react-redux';
-import { unpauseGame, setInitActiveTetrominoes } from '../actions/index.js';
+import { unpauseGame, setInitActiveTetrominoes } from '../actions/index';
 
 let Banner = ({label, color, dispatch}) => {
 

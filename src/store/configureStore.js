@@ -3,7 +3,7 @@ import ReduxThunk from 'redux-thunk';
 import ReduxMulti from 'redux-multi'
 import Immutable from 'immutable';
 import CreateLogger from 'redux-logger';
-import TetrisApp from '../reducers/index.js';
+import TetrisApp from '../reducers/index';
 
 const initialState = Immutable.Map();
 

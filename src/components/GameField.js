@@ -1,9 +1,9 @@
 import React from 'react';
 import { Layer, Stage } from 'react-konva';
-import CurrentTetrominoContainer from '../containers/CurrentTetrominoContainer.js';
-import ActiveTetrominoesContainer from '../containers/ActiveTetrominoesContainer.js';
-import constants from '../constants/constants.js';
-import Banner from './Banner.js';
+import CurrentTetrominoContainer from '../containers/CurrentTetrominoContainer';
+import ActiveTetrominoesContainer from '../containers/ActiveTetrominoesContainer';
+import constants from '../constants/constants';
+import Banner from './Banner';
 
 const { fieldWidth, fieldHeight } = constants;
 

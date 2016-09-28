@@ -1,10 +1,10 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import MenuContainer from '../containers/MenuContainer.js';
-import GameFieldContainer from '../containers/GameFieldContainer.js';
-import GameInfoContainer from '../containers/GameInfoContainer.js';
-import Constants from '../constants/constants.js';
+import MenuContainer from '../containers/MenuContainer';
+import GameFieldContainer from '../containers/GameFieldContainer';
+import GameInfoContainer from '../containers/GameInfoContainer';
+import Constants from '../constants/constants';
 
 injectTapEventPlugin();
 

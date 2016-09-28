@@ -1,4 +1,4 @@
-import Constants from '../constants/constants.js';
+import Constants from '../constants/constants';
 
 let occupied = (grid, x, y) => {
 	return grid[x][y] !== 'grey';

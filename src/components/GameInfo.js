@@ -1,7 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Layer, Stage } from 'react-konva';
-import NextTetrominoContainer from '../containers/NextTetrominoContainer.js';
+import NextTetrominoContainer from '../containers/NextTetrominoContainer';
 
 let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGameOver, changePauseState }) => {
 
