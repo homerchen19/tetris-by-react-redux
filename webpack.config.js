@@ -17,11 +17,15 @@ module.exports = {
     publicPath: '/dist/',
   },
   module: {
+    preLoaders: [{
+      test: /\.jsx?$/,
+      include: path.join(__dirname, 'src'),
+      loader: 'eslint',
+    }],
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, 'src'),
       loader: 'babel-loader',
-      exclude: /node_modules/,
     }, {
       test: /\.scss$/,
       loader: 'style!css!sass?sourceMap',

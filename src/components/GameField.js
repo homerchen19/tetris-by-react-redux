@@ -3,29 +3,35 @@ import { Layer, Stage } from 'react-konva';
 import CurrentTetrominoContainer from '../containers/CurrentTetrominoContainer';
 import ActiveTetrominoesContainer from '../containers/ActiveTetrominoesContainer';
 import constants from '../constants/constants';
-import Banner from './Banner';
+import BannerContainer from '../containers/BannerContainer';
 
 const { fieldWidth, fieldHeight } = constants;
 
-let GameField = ({ isPlaying, isPaused, isGameOver }) => {
+const GameField = ({ isPlaying, isPaused, isGameOver }) => {
 
   if(isPlaying) {
     return (
-      <div style={ { display: 'inline' } }>
+      <div style={{display: 'inline'}}>
         <div id="gameField">
-          <Stage width={ fieldWidth } height={ fieldHeight }>
+          <Stage width={fieldWidth} height={fieldHeight}>
             <Layer>
               <CurrentTetrominoContainer />
               <ActiveTetrominoesContainer />
             </Layer>
           </Stage>
-          { isPaused ? <Banner label="PAUSED" color="white" /> : null}
-          { isGameOver ? <Banner label="GAME OVER" color="red" /> : null}
+          { isPaused ? <BannerContainer label="PAUSED" color="white" /> : null }
+          { isGameOver ? <BannerContainer label="GAME OVER" color="red" /> : null }
         </div>
       </div>
     );
   }
   return null;
+}
+
+GameField.propTypes = {
+  isPlaying: React.PropTypes.bool,
+  isPaused: React.PropTypes.bool,
+  isGameOver: React.PropTypes.bool,
 }
 
 export default GameField;

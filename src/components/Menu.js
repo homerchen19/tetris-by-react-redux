@@ -21,7 +21,8 @@ class Menu extends React.Component {
 }
 
 Menu.propTypes = {
-  isPlaying: React.PropTypes.bool
+  isPlaying: React.PropTypes.bool,
+  handleSpaceBar: React.PropTypes.func,
 }
 
 export default Menu;

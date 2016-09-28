@@ -4,25 +4,36 @@ import Constants from '../constants/constants';
 
 const { blockUnit } = Constants;
 
-let getCoordinates = (shape) => {
+const getCoordinates = (shape) => {
 	const coordinates = [];
-	for(let i = 0; i < shape.length; i++) {
-		for(let j = 0; j < shape[i].length; j++) {
-			if(shape[i][j]) {
+	for (let i = 0; i < shape.length; i++) {
+		for (let j = 0; j < shape[i].length; j++) {
+			if (shape[i][j]) {
 				coordinates.push({ x: j, y: i });
 			}
 		}
 	}
 	return coordinates;
-}
+};
 
-let tetrominoGroup = (xs, ys, color) => {
+const tetrominoGroup = (xs, ys, color) => {
 	const arr = [];
-	for(let i = 0 ; i < xs.length; i++) {
-		arr.push(<Rect key={ i } width={ blockUnit } height={ blockUnit } x={ xs[i] } y={ ys[i] } fill={ color } stroke="black" strokeWidth={ 4 } />);
+	for (let i = 0; i < xs.length; i++) {
+		arr.push(
+			<Rect
+				key={i}
+				width={blockUnit}
+				height={blockUnit}
+				x={xs[i]}
+				y={ys[i]}
+				fill={color}
+				stroke="black"
+				strokeWidth={4}
+			/>
+		);
 	}
 	return arr;
-}
+};
 
 const Tetromino = ({ offsetX, offsetY, shape, color }) => {
 	const coordinates = getCoordinates(shape);

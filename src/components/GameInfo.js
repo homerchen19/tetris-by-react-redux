@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Layer, Stage } from 'react-konva';
 import NextTetrominoContainer from '../containers/NextTetrominoContainer';
 
-let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGameOver, changePauseState }) => {
+const GameInfo = ({ points, clearedLines, isPlaying, isPaused, isGameOver, changePauseState }) => {
 
   const buttonStyle = {
 		margin: '20% 0',
@@ -13,15 +13,15 @@ let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGa
     return (
       <div id="gameInfo">
         <RaisedButton
-          label={ isPaused ? 'UNPAUSE' : 'PAUSE'}
-          style={ buttonStyle }
+          label={isPaused ? 'UNPAUSE' : 'PAUSE'}
+          style={buttonStyle}
           primary
-          onClick={ changePauseState(isPaused) }
-          disabled={ isGameOver }
+          onClick={changePauseState(isPaused)}
+          disabled={isGameOver}
         />
         <div className="scorePanel">
           <h2>Next</h2>
-          <Stage width={ 250 } height={ 100 }>
+          <Stage width={250} height={100}>
             <Layer>
 							<NextTetrominoContainer />
             </Layer>
@@ -38,5 +38,14 @@ let GameInfo = ({ points, clearedLines, nextTetromino, isPlaying, isPaused, isGa
   }
   return null;
 };
+
+GameInfo.propTypes = {
+  points: React.PropTypes.number,
+  clearedLines: React.PropTypes.number,
+  isPlaying: React.PropTypes.bool,
+  isPaused: React.PropTypes.bool,
+  isGameOver: React.PropTypes.bool,
+  changePauseState: React.PropTypes.func,
+}
 
 export default GameInfo;

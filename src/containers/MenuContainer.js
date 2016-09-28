@@ -106,7 +106,7 @@ export const startGame = (firstTime) => (
 	(dispatch, getState) => {
 		const { shapesMapping } = Constants;
 		let currentRandomNumber = Math.floor(Math.random() * 7),
-		 		nextRandomNumber = Math.floor(Math.random() * 7),
+				nextRandomNumber = Math.floor(Math.random() * 7),
 				currentRandomShape = shapesMapping[currentRandomNumber],
 				nextRandomShape = shapesMapping[nextRandomNumber];
 

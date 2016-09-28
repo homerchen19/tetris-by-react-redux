@@ -2,7 +2,6 @@ import { combineReducers } from 'redux-immutable';
 import { handleActions } from 'redux-actions';
 import { MenuState, GameInfoState, TetrominoState, ActiveTetrominoesState } from '../constants/models';
 import Constants from '../constants/constants';
-import { getNewClearedGrid } from '../lib/index';
 
 const { initialGrid, tetrominoes, blockUnit } = Constants;
 
