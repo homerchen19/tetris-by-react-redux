@@ -6,7 +6,7 @@ const GameInfoContainer = connect (
   (state) => ({
     isPlaying: state.getIn(['menuReducer', 'globalGameStatus']) === 'PLAYING',
     isPaused: state.getIn(['gameInfoReducer', 'gameStatus']) === 'PAUSED',
-	  isGameOver: state.getIn(['gameInfoReducer', 'gameStatus']) === 'OVER',
+	  isGameOver: state.getIn(['gameInfoReducer', 'gameStatus']) === 'GAME_OVER',
     points: state.getIn(['gameInfoReducer', 'points']),
 	  clearedLines: state.getIn(['gameInfoReducer', 'clearedLines'])
   }),

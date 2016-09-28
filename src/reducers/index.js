@@ -23,10 +23,10 @@ const gameInfoReducer = handleActions({
     state.set('gameStatus', 'GAME_OVER')
   ),
   ADD_POINTS: (state, { payload }) => (
-    state.set('points', payload)
+    state.set('points', state.get('points') + payload)
   ),
   ADD_CLEARED_LINES: (state, { payload }) => (
-    state.set('clearedLines', payload)
+    state.set('clearedLines', state.get('clearedLines') + payload)
   )
 }, GameInfoState);
 
