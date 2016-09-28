@@ -102,7 +102,7 @@ let moveTetromino = (direction) => (
 	}
 );
 
-let startGame = () => (
+export const startGame = (firstTime) => (
 	(dispatch, getState) => {
 		const { shapesMapping } = Constants;
 		let currentRandomNumber = Math.floor(Math.random() * 7),
@@ -112,7 +112,8 @@ let startGame = () => (
 
 		dispatch([setCurrentTetromino({ currentRandomShape }), addNextTetromino(nextRandomShape)]);
 
-		dropTetromino(dispatch, Date.now(), getState); // Let Tetromino drop
+		if(firstTime)
+			dropTetromino(dispatch, Date.now(), getState); // Let Tetromino drop
 	}
 );
 
@@ -124,7 +125,7 @@ const MenuContainer = connect(
 		handleSpaceBar: (e) => {
 			if(e.keyCode === 32) {
         dispatch([playGame(), setInitActiveTetrominoes()]);
-				dispatch(startGame());
+				dispatch(startGame(true));
 
 				let handleMoving = (e) => {
 					switch(e.keyCode) {

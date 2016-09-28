@@ -3,10 +3,11 @@ import { Layer, Stage } from 'react-konva';
 import CurrentTetrominoContainer from '../containers/CurrentTetrominoContainer.js';
 import ActiveTetrominoesContainer from '../containers/ActiveTetrominoesContainer.js';
 import constants from '../constants/constants.js';
+import Banner from './Banner.js';
 
 const { fieldWidth, fieldHeight } = constants;
 
-let GameField = ({ isPlaying, letsStartGame }) => {
+let GameField = ({ isPlaying, isPaused, isGameOver }) => {
 
   if(isPlaying) {
     return (
@@ -18,6 +19,8 @@ let GameField = ({ isPlaying, letsStartGame }) => {
               <ActiveTetrominoesContainer />
             </Layer>
           </Stage>
+          { isPaused ? <Banner label="PAUSED" color="white" /> : null}
+          { isGameOver ? <Banner label="GAME OVER" color="red" /> : null}
         </div>
       </div>
     );
