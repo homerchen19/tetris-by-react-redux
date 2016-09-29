@@ -7,9 +7,9 @@ const BUILD_DIR = './dist/';
 
 module.exports = {
   entry: [
+    path.resolve(APP_DIR, 'app.js'),
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:8008',
-    path.resolve(APP_DIR, 'app.js')
   ],
   output: {
     path: path.resolve(__dirname, BUILD_DIR),
